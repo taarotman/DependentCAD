@@ -1,0 +1,51 @@
+# based on https://github.com/ShinKage/idris2-sdl/blob/master/sdl_glue/Makefile
+
+IDRIS		:= idris2
+MACHINE		:= $(shell $(CC) -dumpmachine)
+
+ifneq (, $(findstring darwin, $(MACHINE)))
+	OS	:= darwin
+else ifneq (, $(findstring cygwin, $(MACHINE)))
+	OS	:= windows
+else ifneq (, $(findstring mingw, $(MACHINE)))
+	OS	:= windows
+else ifneq (, $(findstring windows, $(MACHINE)))
+	OS	:= windows
+else
+	OS	:= unix
+endif
+
+ifeq ($(OS), darwin)
+	SHLIB_SUFFIX	:= dylib
+else ifeq ($(OS), windows)
+	SHLIB_SUFFIX	:= dll
+else
+	SHLIB_SUFFIX	:= so
+endif
+
+LIBTARGET = utils.$(SHLIB_SUFFIX)
+VERSION = 0.0.1
+INSTALLDIR = `${IDRIS} --libdir`/DependentCAD-$(VERSION)
+
+# HDRS = idris_sdl.h
+OBJS = utils.o
+
+# SDL_LIBS := -lSDL2 $(shell sdl2-config --libs) -lSDL2_image
+# SDL_FLAGS := $(shell sdl2-config --cflags)
+
+# CFLAGS = $(SDL_FLAGS)
+
+$(LIBTARGET): $(OBJS)
+	$(CC) -o $@ -shared $<
+#	$(CC) -o $@ -shared $< $(SDL_LIBS) $(SDL_FLAGS)
+
+clean:
+	rm -f $(OBJS) $(LIBTARGET)
+
+install:
+	mkdir -p $(INSTALLDIR)/lib
+# 	mkdir -p $(INSTALLDIR)/include
+	install -m 755 $(LIBTARGET) $(INSTALLDIR)/lib
+# 	install -m 644 $(HDRS) $(INSTALLDIR)/include
+
+.PHONY: install clean

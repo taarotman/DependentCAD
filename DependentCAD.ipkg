@@ -1,0 +1,50 @@
+package DependentCAD
+version = 0.0.1
+authors = "taarotman"
+-- maintainers =
+-- license =
+brief = "Dependently-typed representation of implicit surfaces based on libfive"
+-- readme =
+-- homepage =
+-- sourceloc =
+-- bugtracker =
+
+-- the Idris2 version required (e.g. langversion >= 0.5.1)
+-- langversion
+
+-- packages to add to search path
+depends = base >= 0.5.1
+
+-- modules to install
+modules = Graphics.L5.Lib
+        , Graphics.L5.Stdlib
+        , Graphics.Implicit.Shape
+        , Graphics.Implicit.L5
+
+-- main file (i.e. file to load at REPL)
+-- main =
+
+-- name of executable
+-- executable =
+-- opts =
+sourcedir = "src"
+builddir = "build"
+-- outputdir =
+
+-- script to run before building
+prebuild = "make -C src/c_utils"
+
+-- script to run after building
+-- postbuild =
+
+-- script to run after building, before installing
+-- preinstall =
+
+-- script to run after installing
+postinstall = "make -C src/c_utils install"
+
+-- script to run before cleaning
+preclean = "make -C src/c_utils clean"
+
+-- script to run after cleaning
+-- postclean =
