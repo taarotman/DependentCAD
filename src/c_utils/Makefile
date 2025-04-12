@@ -27,25 +27,16 @@ LIBTARGET = utils.$(SHLIB_SUFFIX)
 VERSION = 0.0.1
 INSTALLDIR = `${IDRIS} --libdir`/DependentCAD-$(VERSION)
 
-# HDRS = idris_sdl.h
 OBJS = utils.o
-
-# SDL_LIBS := -lSDL2 $(shell sdl2-config --libs) -lSDL2_image
-# SDL_FLAGS := $(shell sdl2-config --cflags)
-
-# CFLAGS = $(SDL_FLAGS)
 
 $(LIBTARGET): $(OBJS)
 	$(CC) -o $@ -shared $<
-#	$(CC) -o $@ -shared $< $(SDL_LIBS) $(SDL_FLAGS)
 
 clean:
 	rm -f $(OBJS) $(LIBTARGET)
 
 install:
 	mkdir -p $(INSTALLDIR)/lib
-# 	mkdir -p $(INSTALLDIR)/include
 	install -m 755 $(LIBTARGET) $(INSTALLDIR)/lib
-# 	install -m 644 $(HDRS) $(INSTALLDIR)/include
 
 .PHONY: install clean
