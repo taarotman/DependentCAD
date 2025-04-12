@@ -5,7 +5,7 @@ import Graphics.L5.Lib
 
 public export
 stdlib : String -> String
-stdlib fn = ffi fn "/home/alfie/.nix-profile/lib/libfive-stdlib.so"
+stdlib fn = ffi fn "libfive-stdlib.so"
 
 public export
 TFloat : Type
