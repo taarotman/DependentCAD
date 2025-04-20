@@ -36,7 +36,7 @@ data BinaryOp -- based on libfive's opcode
   
 public export
 data Shape : Type where
-  Cn : Int -> Shape -- FFI floating point conversions are buggy at the moment
+  Cn : Num a => a -> Shape
   X : Shape
   Y : Shape
   Z : Shape
@@ -158,7 +158,7 @@ record Bounds where
   min, max : Vec3
 
 
-sphere : Int -> Shape
+sphere : Num a => a -> Shape
 sphere r = (X * X) + (Y * Y) + (Z * Z) - Cn r
 
 main : IO ()
