@@ -34,8 +34,9 @@ public export
 blendExpt : Shape -> Shape -> Shape -> Shape
 blendExpt x y z = neg $ (exp (neg z) * x) + (exp (neg z) * y) / z
 
+public export
 blendExptUnit : Shape -> Shape -> Shape -> Shape
-blendExptUnit x y z = blendExpt x y $ (Cn ?aaa) / pow z (Cn ?bbb)
+blendExptUnit x y z = blendExpt x y $ (Cn 2.75) / pow z (Cn 2)
 
 public export
 blendRough : Shape -> Shape -> Shape -> Shape
@@ -43,6 +44,7 @@ blendRough x y z =
   let c  = (sqrt (abs x)) + (sqrt (abs y)) - z
   in union x $ union y c
 
+public export
 blendDifference : Shape -> Shape -> Shape -> Shape -> Shape
 blendDifference x y z w = inverse $ blendExptUnit (inverse x) (offset y w) z
   

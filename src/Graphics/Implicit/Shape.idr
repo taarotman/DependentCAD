@@ -36,7 +36,7 @@ data BinaryOp -- based on libfive's opcode
   
 public export
 data Shape : Type where
-  Cn : Num a => a -> Shape
+  Cn : Double -> Shape
   X : Shape
   Y : Shape
   Z : Shape
@@ -150,7 +150,7 @@ maxL = foldl max (Cn 0)
 public export
 record Vec3 where
   constructor MkV3
-  x,y,z : Int
+  x,y,z : Double
 
 public export
 record Bounds where
@@ -158,7 +158,7 @@ record Bounds where
   min, max : Vec3
 
 
-sphere : Num a => a -> Shape
+sphere : Double -> Shape
 sphere r = (X * X) + (Y * Y) + (Z * Z) - Cn r
 
 main : IO ()

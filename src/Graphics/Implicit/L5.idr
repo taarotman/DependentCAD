@@ -40,7 +40,7 @@ opcode2 Compare = "compare"
 
 public export
 evalShape : Shape -> L5Tree
-evalShape (Cn i)       = l5TreeConst $ fromInt i
+evalShape (Cn i)       = l5TreeConst $ fromInt $ cast i -- FP FFI issues
 evalShape X            = l5TreeX
 evalShape Y            = l5TreeY
 evalShape Z            = l5TreeZ

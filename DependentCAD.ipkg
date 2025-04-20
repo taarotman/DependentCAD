@@ -19,6 +19,7 @@ depends = base >= 0.5.1
 modules = Graphics.L5.Lib
         , Graphics.L5.Stdlib
         , Graphics.Implicit.Shape
+        , Graphics.Implicit.CSG
         , Graphics.Implicit.L5
 
 -- main file (i.e. file to load at REPL)
